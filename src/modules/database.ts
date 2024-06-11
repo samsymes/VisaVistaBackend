@@ -1,14 +1,17 @@
-import mysql from "mysql";
+import mysql from "mysql2";
 
-export const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
+const configuration: any = {
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.password,
+  database: process.env.database,
+  port: process.env.port,
+};
 
-db.connect((err) => {
+export const database = mysql.createConnection(configuration);
+
+database.connect((err) => {
   if (err) throw err;
   console.log("Connected to the database.");
 });
-module.exports = db;
+module.exports = database;

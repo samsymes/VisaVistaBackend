@@ -7,10 +7,7 @@ import { addBaseRoutes } from "./api-controllers/routes/base-routes";
 
 const app: express.Application = express();
 
-const DEFAULT_PORT = 3002;
-const port: number = process.env.PORT
-  ? parseInt(process.env.PORT)
-  : DEFAULT_PORT;
+const port = 3002;
 
 app.use("/user-account", UserAccountRouter);
 
