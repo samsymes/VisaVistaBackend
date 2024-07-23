@@ -1,8 +1,6 @@
 class RestCountryService {
-  private baseUrl = "https://restcountries.com/v3.1/all";
-
   async fetchCountryStats() {
-    const url = `${this.baseUrl}`;
+    const url = "https://restcountries.com/v3.1/all";
     try {
       const response = await fetch(url);
       if (!response.ok) {

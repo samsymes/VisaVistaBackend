@@ -7,5 +7,5 @@ RestCountryRouter.get("/countryInfo", async (req: Request, res: Response) => {
   const countryData = await RestCountryService.fetchCountryStats();
 
   res.status(200).json(countryData);
-  res.send("Hello from RestCountryRouter!");
+  res.send(countryData);
 });
