@@ -1,16 +1,16 @@
-class RestCountryService {
-  async fetchCountryStats() {
-    const url = "https://restcountries.com/v3.1/all";
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching country data:", error);
+export class RestCountryService {
+  private apiUrl = "https://restcountries.com/v3.1/all";
+
+  async fetchCountryStats(): Promise<any> {
+    const url = `${this.apiUrl}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch country data `);
     }
+
+    const data = await response.json();
+    console.log("Data", data);
+    return data;
   }
 }
-export default new RestCountryService();
