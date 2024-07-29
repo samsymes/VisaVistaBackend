@@ -1,16 +1,20 @@
-export class RestCountryService {
+export default class RestCountryService {
+  constructor() {}
   private apiUrl = "https://restcountries.com/v3.1/all";
 
   async fetchCountryStats(): Promise<any> {
-    const url = `${this.apiUrl}`;
-    const response = await fetch(url);
+    try {
+      const response = await fetch(`${this.apiUrl}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const countryInfo = await response.json();
+      console.log("Data", countryInfo);
+      return countryInfo;
+    } catch (error) {
+      console.error("Failed to fetch country stats:", error);
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch country data `);
+      return { error: "Failed to fetch country stats" };
     }
-
-    const data = await response.json();
-    console.log("Data", data);
-    return data;
   }
 }
