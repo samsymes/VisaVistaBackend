@@ -1,8 +1,8 @@
-export default class RestCountryService {
+export default class RestCountriesService {
   constructor() {}
   private apiUrl = "https://restcountries.com/v3.1/all";
 
-  async fetchCountryStats(): Promise<any> {
+  async fetchCountriesStats(): Promise<any> {
     try {
       const response = await fetch(`${this.apiUrl}`);
       if (!response.ok) {
