@@ -8,8 +8,9 @@ RestCountriesRouter.get(
   "/rest-countries",
   async (req: Request, res: Response) => {
     try {
-      const countryInfo = restCountriesService.fetchCountriesStats();
-      req.body = countryInfo;
+      const countryInfo = await restCountriesService.fetchCountriesStats();
+      res.send(countryInfo);
+      console.log("Data", countryInfo);
     } catch (error) {
       console.error(error);
       res.status(500).send(error);
