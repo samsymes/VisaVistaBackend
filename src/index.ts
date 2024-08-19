@@ -6,7 +6,6 @@ import bodyParser from "body-parser";
 // import { UserAccountRouter } from "./api-controllers/routes/user-account.controller";
 import { RestCountriesRouter } from "./api-controllers/routes/rest-countries.controller";
 const cors = require("cors");
-import { addBaseRoutes } from "./api-controllers/routes/base-routes";
 const port = 3002;
 
 const app = express();
@@ -19,7 +18,7 @@ app.use(
     credentials: true,
   })
 );
-app.use("/", addBaseRoutes(express.Router()));
+app.use("/", RestCountriesRouter(express.Router()));
 // app.use("/user-account", UserAccountRouter);
 app.use("/rest-countries", RestCountriesRouter);
 

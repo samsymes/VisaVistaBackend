@@ -1,12 +1,14 @@
-import express, { Request, Response } from "express";
+import { Request, Response, Router } from "express";
 import RestCountriesService from "../../services/rest-countries.service";
 
-export const RestCountriesRouter = express.Router();
-const restCountriesService = new RestCountriesService();
+export const RestCountriesRouter = (router: Router): Router => {
+  const restCountriesService = new RestCountriesService();
 
-RestCountriesRouter.get(
-  "/rest-countries",
-  async (req: Request, res: Response) => {
+  router.get("/", (req, res) => {
+    console.log("Request", req);
+    res.send("Hello from Rest Countries Routes!");
+  });
+  router.get("/rest-countries", async (req: Request, res: Response) => {
     try {
       const countryInfo = await restCountriesService.fetchCountriesStats();
       res.send(countryInfo);
@@ -15,5 +17,6 @@ RestCountriesRouter.get(
       console.error(error);
       res.status(500).send(error);
     }
-  }
-);
+  });
+  return router;
+};
