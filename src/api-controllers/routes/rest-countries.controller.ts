@@ -8,9 +8,14 @@ export const RestCountriesRouter = (router: Router): Router => {
     console.log("Request", req);
     res.send("Hello from Rest Countries Routes!");
   });
+
+  // Update the route to handle query parameters
   router.get("/rest-countries", async (req: Request, res: Response) => {
     try {
-      const countryInfo = await restCountriesService.fetchCountriesStats();
+      const toCountry = req.query.To as string;
+      const countryInfo = await restCountriesService.fetchCountriesStats(
+        toCountry
+      );
       res.send(countryInfo);
       console.log("Data", countryInfo);
     } catch (error) {
@@ -18,5 +23,6 @@ export const RestCountriesRouter = (router: Router): Router => {
       res.status(500).send(error);
     }
   });
+
   return router;
 };
