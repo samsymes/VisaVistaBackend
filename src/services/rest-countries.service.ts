@@ -1,22 +1,11 @@
 export default class RestCountriesService {
   constructor() {}
-  private apiUrl = "https://restcountries.com/v3.1/alpha?codes=";
+  private apiUrl = "https://restcountries.com/v3.1/alpha";
 
-  async fetchCountriesStats(
-    fromCountry: string,
-    toCountry: string
-  ): Promise<any> {
+  async fetchCountriesStats(toCountry: string): Promise<any> {
     try {
-      const response = await fetch(
-        `${this.apiUrl}/${fromCountry},${toCountry}`
-      );
-      console.log(
-        "FROM BACKEND SERVER:",
-        "to:",
-        toCountry,
-        "from",
-        fromCountry
-      );
+      const response = await fetch(`${this.apiUrl}/${toCountry}`);
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

@@ -11,11 +11,8 @@ export const RestCountriesRouter = (router: Router): Router => {
 
   router.get("/rest-countries", async (req: Request, res: Response) => {
     try {
-      const fromCountry = req.query.From as string;
       const toCountry = req.query.To as string;
-      console.log("FROM CONTROLLER:", "To:", toCountry, "From:", fromCountry);
       const countryInfo = await restCountriesService.fetchCountriesStats(
-        fromCountry,
         toCountry
       );
       res.send(countryInfo);
