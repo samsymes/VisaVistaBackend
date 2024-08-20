@@ -9,15 +9,18 @@ export const RestCountriesRouter = (router: Router): Router => {
     res.send("Hello from Rest Countries Routes!");
   });
 
-  // Update the route to handle query parameters
   router.get("/rest-countries", async (req: Request, res: Response) => {
     try {
+      const fromCountry = req.query.From as string;
       const toCountry = req.query.To as string;
+      console.log("FROM CONTROLLER:", "To:", toCountry, "From:", fromCountry);
       const countryInfo = await restCountriesService.fetchCountriesStats(
+        fromCountry,
         toCountry
       );
       res.send(countryInfo);
-      console.log("Data", countryInfo);
+
+      // console.log("Data", countryInfo);
     } catch (error) {
       console.error(error);
       res.status(500).send(error);
