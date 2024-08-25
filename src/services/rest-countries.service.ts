@@ -8,7 +8,6 @@ export default class RestCountriesService {
     try {
       const response = await fetch(`${this.apiUrl}/${toCountry}`);
       const countryInfo = await response.json();
-      // transform the data
       if (countryInfo) {
         const countryInfoObj = countryInfo.map((country: any) => {
           return {
@@ -21,7 +20,7 @@ export default class RestCountriesService {
             latLng: country.latlng, //array
           };
         });
-        return countryInfoObj;
+        return countryInfoObj[0];
       }
     } catch (error) {
       console.error("Failed to fetch country stats:", error);
