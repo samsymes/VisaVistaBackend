@@ -1,5 +1,3 @@
-import { count } from "console";
-
 export default class RestCountriesService {
   constructor() {}
   private apiUrl = "https://restcountries.com/v3.1/alpha";
@@ -8,36 +6,27 @@ export default class RestCountriesService {
     try {
       const response = await fetch(`${this.apiUrl}/${toCountry}`);
       const countryInfo = await response.json();
+      console.log(countryInfo);
       if (countryInfo) {
         const countryInfoObj = countryInfo.map((country: any) => {
           return {
             name: country.name.common,
             capital: country.capital,
-            currency: country.currencies, //object EUR: {name: 'Euro', symbol: '€'}
-            timeZones: country.timezones, //array
-            population: country.population,
-            languages: country.languages, //array
-            latLng: country.latlng, //array
+            currencies: Object.values(country.currencies).join(", "),
+            timeZones: country.timezones,
+            population: country.population.toLocaleString(),
+            languages: Object.values(country.languages).join(", "),
+            lat: Number(country.latlng?.[0]), //works
+            lng: Number(country.lanlng?.[1]), //does not work
           };
         });
+
         return countryInfoObj[0];
       }
     } catch (error) {
       console.error("Failed to fetch country stats:", error);
 
       return { error: "Failed to fetch country stats" };
-    }
-  }
-
-  async destinationCountryName(To: string): Promise<string> {
-    try {
-      const countryInfoObj = await this.fetchCountriesStats(To);
-      const toCountryName = countryInfoObj.name.common;
-      console.log("destinationCountryName is", toCountryName);
-      return toCountryName;
-    } catch (error) {
-      console.error("Failed to fetch country stats:", error);
-      return "Country Name not found";
     }
   }
 }
