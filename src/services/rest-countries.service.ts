@@ -12,12 +12,12 @@ export default class RestCountriesService {
           return {
             name: country.name.common,
             capital: country.capital,
-            currencies: Object.values(country.currencies).join(", "),
-            timeZones: country.timezones,
+            currencies: country.currencies, //[object Object] does not work
+            timeZones: country.timezones.join(", "),
             population: country.population.toLocaleString(),
             languages: Object.values(country.languages).join(", "),
-            lat: Number(country.latlng?.[0]), //works
-            lng: Number(country.lanlng?.[1]), //does not work
+            lat: country.latlng[0],
+            lng: country.latlng[1],
           };
         });
 
