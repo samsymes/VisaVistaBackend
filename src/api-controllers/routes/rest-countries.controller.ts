@@ -15,9 +15,8 @@ export const RestCountriesRouter = (router: Router): Router => {
       if (typeof toCountry !== "string") {
         res.status(400).send("Invalid country code");
       } else {
-        const countryInfo = await restCountriesService.fetchCountriesStats(
-          toCountry
-        );
+        const countryInfo =
+          await restCountriesService.destinationCountryInfoObject(toCountry);
         res.send(countryInfo);
       }
       // console.log("Data", countryInfo);

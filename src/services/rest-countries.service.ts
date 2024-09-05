@@ -42,7 +42,7 @@ export default class RestCountriesService {
     return null;
   }
 
-  async fetchCountriesStats(toCountry: string): Promise<any> {
+  async destinationCountryInfoObject(toCountry: string): Promise<any> {
     try {
       const countryInfoObject = await this.fetchCountryData(toCountry);
       return this.transformCountryData(countryInfoObject);
