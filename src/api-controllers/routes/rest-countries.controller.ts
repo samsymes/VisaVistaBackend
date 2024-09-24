@@ -12,12 +12,16 @@ export const RestCountriesRouter = (router: Router): Router => {
   router.get("/rest-countries", async (req: Request, res: Response) => {
     try {
       const toCountry = req.query.To;
-      if (typeof toCountry !== "string") {
+      const fromCountry = req.query.From;
+      if (typeof toCountry !== "string" || typeof fromCountry !== "string") {
         res.status(400).send("Invalid country code");
       } else {
-        const countryInfo =
+        const destinationCountryInfo =
           await restCountriesService.destinationCountryInfoObject(toCountry);
-        res.send(countryInfo);
+        const sourceCountryInfo =
+          await restCountriesService.sourceCountryInfoObject(fromCountry);
+
+        res.send({ destinationCountryInfo, sourceCountryInfo });
       }
       // console.log("Data", countryInfo);
     } catch (error) {

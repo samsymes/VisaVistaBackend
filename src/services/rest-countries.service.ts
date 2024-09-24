@@ -51,4 +51,13 @@ export default class RestCountriesService {
       return { error: "Failed to fetch country stats" };
     }
   }
+  async sourceCountryInfoObject(fromCountry: string): Promise<any> {
+    try {
+      const countryInfoObject = await this.fetchCountryData(fromCountry);
+      return this.transformCountryData(countryInfoObject);
+    } catch (error) {
+      console.error("Failed to fetch country stats:", error);
+      return { error: "Failed to fetch country stats" };
+    }
+  }
 }
