@@ -1,4 +1,5 @@
 export default class RestCountriesService {
+  constructor() {}
   private apiUrl = "https://restcountries.com/v3.1/alpha";
 
   async fetchCountryData(toCountry: string): Promise<any> {
@@ -44,17 +45,18 @@ export default class RestCountriesService {
 
   async destinationCountryInfoObject(toCountry: string): Promise<any> {
     try {
-      const countryInfoObject = await this.fetchCountryData(toCountry);
-      return this.transformCountryData(countryInfoObject);
+      const destinationCountry = await this.fetchCountryData(toCountry);
+      return this.transformCountryData(destinationCountry);
     } catch (error) {
       console.error("Failed to fetch country stats:", error);
       return { error: "Failed to fetch country stats" };
     }
   }
+
   async sourceCountryInfoObject(fromCountry: string): Promise<any> {
     try {
-      const countryInfoObject = await this.fetchCountryData(fromCountry);
-      return this.transformCountryData(countryInfoObject);
+      const sourceCountry = await this.fetchCountryData(fromCountry);
+      return this.transformCountryData(sourceCountry);
     } catch (error) {
       console.error("Failed to fetch country stats:", error);
       return { error: "Failed to fetch country stats" };
