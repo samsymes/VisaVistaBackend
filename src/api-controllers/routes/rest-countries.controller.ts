@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import RestCountriesService from "../../services/rest-countries.service";
-
+import { destinationCountryInfo } from "../../services/rest-countries.service";
+import { sourceCountryInfo } from "../../services/rest-countries.service";
 export const RestCountriesRouter = (router: Router): Router => {
   const restCountriesService = new RestCountriesService();
 
@@ -16,12 +17,10 @@ export const RestCountriesRouter = (router: Router): Router => {
       if (typeof toCountry !== "string" || typeof fromCountry !== "string") {
         res.status(400).send("Invalid country code");
       } else {
-        const destinationCountryInfo =
-          await restCountriesService.destinationCountryInfoObject(toCountry);
-        const sourceCountryInfo =
-          await restCountriesService.sourceCountryInfoObject(fromCountry);
+        const destinationCountry = await destinationCountryInfo(toCountry);
+        const sourceCountry = await sourceCountryInfo(fromCountry);
 
-        res.send({ destinationCountryInfo, sourceCountryInfo });
+        res.send({ destinationCountry, sourceCountry });
       }
       // console.log("Data", countryInfo);
     } catch (error) {

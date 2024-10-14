@@ -67,10 +67,7 @@ export async function destinationCountryInfo(
     return { error: "Failed to fetch country stats" };
   }
 }
-export async function sourceCountryInfoObject(
-  this: object,
-  fromCountry: string
-): Promise<object> {
+export async function sourceCountryInfo(fromCountry: string): Promise<object> {
   try {
     const restCountriesService = new RestCountriesService();
     const sourceCountry = await restCountriesService.fetchCountryData(
