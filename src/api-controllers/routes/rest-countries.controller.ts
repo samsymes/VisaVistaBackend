@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import RestCountriesService from "../../services/rest-countries.service";
-import { destinationCountryInfo } from "../../services/rest-countries.service";
-import { sourceCountryInfo } from "../../services/rest-countries.service";
+import { destinationCountryInfo } from "../../utils/dataTransformation";
+import { sourceCountryInfo } from "../../utils/dataTransformation";
 export const RestCountriesRouter = (router: Router): Router => {
   const restCountriesService = new RestCountriesService();
 
