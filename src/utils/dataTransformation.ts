@@ -54,9 +54,12 @@ export async function sourceCountryInfo(
 }
 
 export function transformCountryData(
+  // is 58 correct?
   countryInfoObject: CountryObject[]
 ): TransformedCountry[] {
-  try {
+  if (!countryInfoObject) {
+    throw new Error("Unable to transform country data");
+  } else {
     const countryInfo = countryInfoObject[0];
     console.log("countryInfo type of", typeof countryInfo);
     if (!countryInfo) {
@@ -73,7 +76,7 @@ export function transformCountryData(
 
       return {
         name: country.name.common,
-        capital: country.capital,
+        capital: country.capital, //why is this returning an array?
         currencies,
         symbols,
         timeZones: country.timezones,
@@ -82,8 +85,5 @@ export function transformCountryData(
         latlng: country.latlng,
       };
     });
-  } catch (error) {
-    console.error("Failed to transform country data:", error);
-    throw error;
   }
 }
