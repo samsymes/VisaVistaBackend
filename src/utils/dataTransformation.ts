@@ -1,60 +1,8 @@
-import RestCountriesService from "../services/rest-countries.service";
-type CountryObject = {
-  name: { common: string };
-  capital: string;
-  currencies: { [key: string]: { name: string; symbol: string } };
-  timezones: string[];
-  population: number;
-  languages: string[];
-  latlng: [number, number];
-};
-
-type TransformedCountry = {
-  name: string;
-  capital: string;
-  currencies: string;
-  symbols: string;
-  timeZones: string | string[];
-  population: string;
-  languages: string | string[];
-  latlng: [number, number];
-};
-
-export async function destinationCountryInfo(
-  toCountry: string
-): Promise<TransformedCountry[]> {
-  try {
-    const restCountryService = new RestCountriesService();
-    const destinationCountry = await restCountryService.fetchCountryData(
-      toCountry
-    );
-    console.log("destination country type of", typeof destinationCountry);
-    const transformedCountry = transformCountryData(destinationCountry);
-    return transformedCountry;
-  } catch (error) {
-    console.error("Failed to fetch country stats:", error);
-    return [];
-  }
-}
-export async function sourceCountryInfo(
-  fromCountry: string
-): Promise<TransformedCountry[]> {
-  try {
-    const restCountriesService = new RestCountriesService();
-    const sourceCountry = await restCountriesService.fetchCountryData(
-      fromCountry
-    );
-    console.log("source country type of", typeof sourceCountry);
-    const transformedSourceCountry = transformCountryData(sourceCountry);
-    return transformedSourceCountry;
-  } catch (error) {
-    console.error("Failed to fetch country stats:", error);
-    return [];
-  }
-}
+import { CountryObject } from "../services/rest-country-types/rest-countries.types";
+import { TransformedCountry } from "../services/rest-country-types/rest-countries.types";
 
 export function transformCountryData(
-  // is 58 correct?
+  // is 25 correct?
   countryInfoObject: CountryObject[]
 ): TransformedCountry[] {
   if (!countryInfoObject) {
