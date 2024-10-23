@@ -1,10 +1,7 @@
 import { Request, Response, Router } from "express";
-import RestCountriesService from "../../services/rest-countries.service";
 import { destinationCountryInfo } from "../../services/rest-countries.service";
 import { sourceCountryInfo } from "../../services/rest-countries.service";
 export const RestCountriesRouter = (router: Router): Router => {
-  const restCountriesService = new RestCountriesService();
-
   router.get("/", (req, res) => {
     console.log("Request", req);
     res.send("Hello from Rest Countries Routes!");

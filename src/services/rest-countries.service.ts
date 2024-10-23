@@ -10,6 +10,7 @@ export default class RestCountriesService {
       const response = await fetch(`${this.apiUrl}/${toCountry}`);
       console.log("response type of", typeof response);
       const countryInfoObject = await response.json();
+      console.log("countryInfoObject", countryInfoObject);
       return countryInfoObject;
     } catch (error) {
       console.error("Failed to fetch country data:", error);
